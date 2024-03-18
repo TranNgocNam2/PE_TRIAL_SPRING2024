@@ -1,0 +1,46 @@
+@page
+@using Repository.Entity
+@model Eyeglasses_TranNgocNam.Pages.Add
+
+@{
+    ViewData["Title"] = "Add Eyeglasses";
+}
+
+<h1>Add Eyeglasses</h1>
+
+<div class="container" style="text-align: center; font-weight: bold">
+    <form method="post">
+        <div class="form-group">
+            <label>Eyeglasses Name:</label>
+            <input type="text" asp-for="Eyeglass.EyeglassesName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Eyeglasses Description:</label>
+            <input type="text" asp-for="Eyeglass.EyeglassesDescription" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Frame Color:</label>
+            <input type="text" asp-for="Eyeglass.FrameColor" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Price:</label>
+            <input type="number" asp-for="Eyeglass.Price" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Quantity:</label>
+            <input type="number" asp-for="Eyeglass.Quantity" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="LensTypeId">Len Types:</label>
+            <select class="form-control" asp-for="Eyeglass.LensTypeId">
+                <option value="Select Len Type"></option>
+                @foreach (var lenType in Model.LensTypes)
+                {
+                    <option value="@lenType.LensTypeId">@lenType.LensTypeName</option>
+                }
+            </select>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <button type="submit" class="btn btn-primary">Add Eyeglasses</button>
+    </form>
+</div>

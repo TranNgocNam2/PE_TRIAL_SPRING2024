@@ -1,0 +1,60 @@
+﻿@page "/Index"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Eyeglasses ID</th>
+        <th>Eyeglasses Name</th>
+        <th>Eyeglasses Description</th>    
+        <th>Frame Color</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Created Date</th>
+        <<th>Lens Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Eyeglasses)
+    {
+        <tr>
+            <td>@item.EyeglassesId</td>
+            <td>@item.EyeglassesName</td>
+            <td>@item.EyeglassesDescription</td>
+            <td>@item.FrameColor</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td>@item.CreatedDate</td>
+            <td>@item.LensType!.LensTypeName</td>
+            <td>
+                <a asp-page="/Update" asp-route-id="@item.EyeglassesId" class="btn btn-primary">Update</a>
+                <a asp-page="/Delete" asp-route-id="@item.EyeglassesId" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+    
+    <form method="get">
+        <div>
+            <label style="margin-right: 20px">Min Price:<input style="margin-left: 20px" type="number" name="MinPrice"/></label>
+            <label style="margin-right: 20px">Max Price:<input style="margin-left: 20px" type="number" name="MaxPrice"/></label>
+            <label style="margin-right: 20px">Eyeglasses Description: <input style="margin-left: 20px" type="text" name="description"/></label>
+        </div>
+        <div style="margin-top: 10px">
+            <button  class="btn btn-primary" name="search">Search</button>
+            <a style="color: pink;" asp-page="./Add" class="btn btn-success">Add</a>
+        </div>
+    </form>
+</table>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            window.location.href = "/Delete?id=" + id;
+        }
+    }
+</script>
